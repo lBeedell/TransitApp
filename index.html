@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--This is the landing page which has the different tabs to other pages within our website
+create a div with an id,
+in css create a style, refer to that div id, -->
+<html lang="en">
+<head>
+<style type="text/css">
+	</style>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>	
+	<title>jQuery UI Dialog - Default functionality</title>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script>
+	  $(function() {
+		$( "#dialog" ).dialog();
+	  });
+	</script>
+</head>
+<title>Live Laval Bus Info</title>
+
+<body>
+	<div id="container">
+		<div id="header">
+<!--Website Title-->
+			<h1 ="#">Bus Schedule</h1>
+			
+<!--Links to different pages of our website. Styled in .css-->	
+			<div id="links">
+				<a href="index.html">Home</a>
+				<a href="routeMap.html">Route Map</a>
+				<a href="mission.html">Mission</a>
+				<a href="about.html">About Us</a>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<h2> Find and click on your location below to find out whether you have enough time to get on the nearest bus. </h2>
+	</div>
+	<div id="dialog" title="Basic dialog">
+		<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the 'x' icon.</p>
+	</div>
+		
+	
+	
+
+		<div id="map">
+				<!--  -->
+				<!--  -->
+			<script>
+				//stores the user's location.
+				var coords;
+				//initialize map object using function initMap from google.
+					
+				function initMap() {
+						var centerMap = {lat: 45.566815, lng: -73.752490};
+						var mapDiv = document.getElementById('map');
+						// create a NEW Google Maps object:
+						var map = new google.maps.Map(mapDiv, {
+						//set the starting location of map and zoom level
+							center: centerMap,
+							zoom: 12
+						});
+						//add custom layers like bike layers.
+					
+						var transitLayer = new google.maps.TransitLayer();
+						transitLayer.setMap(map);
+											
+							
+/* STORE LAT LONGS IN CONSOLE
+*/
+						google.maps.event.addListener(map, "click", function(event) {
+						   placeMarker(event.latLng);
+						   coords = event.latLng.toString();
+						   console.log(coords);
+						   //need function to read the first and second entry in the console. Object reading. 
+						});
+						function placeMarker(location) {
+							//var man = 'files/images/run_man.png'
+							var marker = new google.maps.Marker({
+								position: location, 
+								map: map
+								//icon : man
+							});
+						}
+						
+						//Jquery code to access bus latlongs from Fusion table
+						$(document).ready(function(){
+
+
+						
+						});
+						
+						
+						
+						//icon style 
+						var green = 'files/images/bus1.png';
+						var marker = new google.maps.Marker({
+							position: {lat: 45.56, lng: -73.56},
+							map: map,
+							title: 'Montreal',
+							icon : green
+						});
+					
+				} //InitMap ENDS
+				//parameters for busdist should be console.log(userinput lat1 long2)
+				//and nearest bus stop (lat long);
+					//busdist()
+			//Distance function
+			//function nearStop(busStop latlngs from fusion table);
+			busdist(45.57596068049629, -73.75190734863281, 45.554328323750596, -73.8090705871582);
+				function busdist(lat1,lon1,lat2,lon2) {
+				  var R = 6371; // Radius of the earth in kms.
+				  var dLat = deg2rad(lat2-lat1);  // see deg2rad function below
+				  var dLon = deg2rad(lon2-lon1); 
+				  var a = 
+					Math.sin(dLat/2) * Math.sin(dLat/2) +
+					Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+					Math.sin(dLon/2) * Math.sin(dLon/2)
+					; 
+				  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+				  var d = R * c; // Distance in km
+				  console.log("Distance is  = " + d + " kms.");
+				  var dW = walkTime(d);
+				  console.log("At a speed of 0.1km/min, walk time is: " + dW + " minutes");
+				}
+				//converts from degree to radian
+				function deg2rad(deg) {
+				  return deg * (Math.PI/180)
+				}
+				//converts from distance(km) to walking time (km/min)
+				function walkTime(dist){
+					time = dist/(0.1);
+					return time;
+				}
+					
+				</script>
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWmwjhpck2h3GByy-dI0AA_QddAMBWxfw&callback=initMap"
+				async defer></script>
+				
+		</div>
+			
+	<!--can add a footer here with credits to our group or -->
+	<div id="container">
+		<div class="contenttext">
+			<h3 ="#">      Map to help you catch your bus. Carte pour vous-aidez à attrapé la bus <FONT COLOR="#00FF00">Green : Secured </FONT>,<FONT COLOR="#FE2E2E"> Red : Unsecured</FONT></h3>
+		</div>
+	</div>
+</body>
+</html>
+
+

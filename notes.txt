@@ -1,0 +1,23 @@
+Created by Leslie Beedell
+
+Notes: 
+
+Call on these files through their local URL
+
+“/files/FILENAME.ext”. 
+
+For example, if you wanted to access a picture saved as
+Image1.jpg, make sure it is saved in the files folder and referred to with the URL 
+
+/files/Image1.jpg. 
+
+Start all filepaths beginning with “/files/”; otherwise, they will NOT WORK when they are evaluated. 
+Feel free to add sub folders within this file to improve organization (i.e., an “images” subfolder). 
+For example, place the following inside the “files” folder:
+
+
+Any images, logos or symbology used for your application
+Any additional authoritative datasets
+
+
+Styles sheet from : http://www.html.am/templates/downloads/bryantsmith/landscapetitles/
